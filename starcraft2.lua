@@ -1,5 +1,5 @@
--- Version 1.3
--- 29.04.2012
+-- Version 1.4
+-- 27.01.2013
 
 function OnEvent(event, arg, family)
 
@@ -17,7 +17,9 @@ if (event=="PROFILE_ACTIVATED" and GetRunningTime()< 50) then
 	SetMKeyState(1); -- Force M1
 
 	-- INIT Variables for all Race
-
+	SC2WOL = "1";
+	SC2HOTS = "2";
+	CURRENTGAME = SC2WOL;
 	ARMY1 = "1";
 	ARMY2 = "2";
 	BASES = "5";
@@ -102,14 +104,14 @@ end
 -- G1, 
 ---------------------------------------------------
 if (event=="G_PRESSED" and arg==1) then
-	--Nothing
+	Init(SC2HOTS);
 end	
 
 ---------------------------------------------------
 -- G7, new game
 ---------------------------------------------------
 if (event=="G_PRESSED" and arg==7) then
-	Init();
+	Init(SC2WOL);
 end	
 
 ---------------------------------------------------
@@ -360,7 +362,8 @@ end
 ---------------------------------------------------
 -- Functions
 ---------------------------------------------------
-function Init()
+function Init(gameMode)
+	CURRENTGAME = gameMode;
 	OutputLogMessage("VAR_Start Init = %s\n",VAR_start);
 	ReleaseAll();
 	ClearLog();
@@ -468,31 +471,31 @@ function start()
 	-- 1st run
 	if VAR_start==0 then
 		OutputLogMessage("Function start");
+		if CURRENTGAME == SC2WOL then
+			SelectWorkers(0);
+			UnSelect(3);
+			AddGroup("0",0,0);
+			PressAndReleaseKey("0");
+			UnSelect(2);
+			AddGroup("8",0,0);
 
-		SelectWorkers(0);
-		UnSelect(3);
-		AddGroup("0",0,0);
-		PressAndReleaseKey("0");
-		UnSelect(2);
-		AddGroup("8",0,0);
+			SelectWorkers(0);
 
-		SelectWorkers(0);
+			PressAndReleaseKey("backspace");
+			Sleep(math.random(40, 50));
 
-		PressAndReleaseKey("backspace");
-		Sleep(math.random(40, 50));
+			MoveMouseTo(32819, 23566);
+			PressAndReleaseMouseButton(1);
 
-		MoveMouseTo(32819, 23566);
-		PressAndReleaseMouseButton(1);
+			PressKey("lctrl");
+			Sleep(math.random(10, 20));
 
-		PressKey("lctrl");
-		Sleep(math.random(10, 20));
+			PressAndReleaseKey(BASES);
+			Sleep(math.random(10, 20));
 
-		PressAndReleaseKey(BASES);
-		Sleep(math.random(10, 20));
-
-		ReleaseKey("lctrl");
-		Sleep(math.random(10, 20));
-
+			ReleaseKey("lctrl");
+			Sleep(math.random(10, 20));
+		end
 		CreatePeonRandom();
 
 		PressAndReleaseKey(BASES);
