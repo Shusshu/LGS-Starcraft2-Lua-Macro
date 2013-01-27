@@ -486,16 +486,17 @@ function start()
 
 			MoveMouseTo(32819, 23566);
 			PressAndReleaseMouseButton(1);
-
-			PressKey("lctrl");
-			Sleep(math.random(10, 20));
-
-			PressAndReleaseKey(BASES);
-			Sleep(math.random(10, 20));
-
-			ReleaseKey("lctrl");
-			Sleep(math.random(10, 20));
 		end
+		
+		PressKey("lctrl");
+		Sleep(math.random(10, 20));
+
+		PressAndReleaseKey(BASES);
+		Sleep(math.random(10, 20));
+
+		ReleaseKey("lctrl");
+		Sleep(math.random(10, 20));
+		
 		CreatePeonRandom();
 
 		PressAndReleaseKey(BASES);
