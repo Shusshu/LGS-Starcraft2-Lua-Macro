@@ -480,14 +480,14 @@ function start()
 			AddGroup("8",0,0);
 
 			SelectWorkers(0);
-
-			PressAndReleaseKey("backspace");
-			Sleep(math.random(40, 50));
-
-			MoveMouseTo(32819, 23566);
-			PressAndReleaseMouseButton(1);
 		end
 		
+		PressAndReleaseKey("backspace");
+		Sleep(math.random(40, 50));
+
+		MoveMouseTo(32819, 23566);
+		PressAndReleaseMouseButton(1);
+			
 		PressKey("lctrl");
 		Sleep(math.random(10, 20));
 
