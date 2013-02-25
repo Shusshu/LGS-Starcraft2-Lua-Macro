@@ -1,5 +1,5 @@
--- Version 1.4
--- 27.01.2013
+-- Version 1.5
+-- 25.02.2013
 
 function OnEvent(event, arg, family)
 
@@ -19,7 +19,7 @@ if (event=="PROFILE_ACTIVATED" and GetRunningTime()< 50) then
 	-- INIT Variables for all Race
 	SC2WOL = "1";
 	SC2HOTS = "2";
-	CURRENTGAME = SC2WOL;
+	CURRENTGAME = SC2HOTS;
 	ARMY1 = "1";
 	ARMY2 = "2";
 	BASES = "5";
@@ -36,6 +36,7 @@ if (event=="PROFILE_ACTIVATED" and GetRunningTime()< 50) then
 	TimeSinceLastLarva=0;
 
 	-- Init globals variables for Terran
+
 
 	-- Init globals variables for Protoss
 
@@ -59,7 +60,7 @@ end
 -- On every event do
 ------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
---showMousePosition();
+showMousePosition();
 OutputLogMessage("OnEvent = %s, arg = %s\n", event, arg);
 
 ------------------------------------------------------------------------------------------------------
@@ -111,8 +112,15 @@ end
 -- G7, new game
 ---------------------------------------------------
 if (event=="G_PRESSED" and arg==7) then
-	Init(SC2WOL);
+	
 end	
+
+---------------------------------------------------
+-- G11, Split units
+---------------------------------------------------
+if (event=="G_PRESSED"  and arg==11) then
+	splitUnits();
+end
 
 ---------------------------------------------------
 -- G2, Start
@@ -129,7 +137,6 @@ end
 ---------------------------------------------------
 if (event=="G_PRESSED" and arg==8) then
 	kitteWithRangedUnits();
-	
 end	
 
 ------------------------------------------------------------------------------------------------------
@@ -195,29 +202,23 @@ if (Race==1) then
 ---------------------------------------------------
 -- G5, Nothing
 ---------------------------------------------------
-if (event=="G_PRESSED" and arg==5) then
-	--Nothing
-end
-
----------------------------------------------------
--- G11, Nothing
----------------------------------------------------
-	if (event=="G_PRESSED"  and arg==11) then
+	if (event=="G_PRESSED" and arg==5) then
 		--Nothing
 	end
+
 ---------------------------------------------------
 -- G6, Nothing
 ---------------------------------------------------
-if (event=="G_PRESSED" and arg==7) then
-	--Nothing
-end	
+	if (event=="G_PRESSED" and arg==7) then
+		--Nothing
+	end	
 
 ---------------------------------------------------
 -- G12, Queen make larva
 ---------------------------------------------------
-if (event=="G_PRESSED" and arg==12) then
-	MakeLarva()
-end
+	if (event=="G_PRESSED" and arg==12) then
+		MakeLarva()
+	end
 
 ------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
@@ -263,16 +264,10 @@ elseif (Race==2) then
 ---------------------------------------------------
 -- G5, Nothing
 ---------------------------------------------------
-if (event=="G_PRESSED" and arg==5) then
-	--Nothing
-end
-
----------------------------------------------------
--- G11, Nothing
----------------------------------------------------
-	if (event=="G_PRESSED"  and arg==11) then
+	if (event=="G_PRESSED" and arg==5) then
 		--Nothing
 	end
+
 ---------------------------------------------------
 -- G6, Nothing
 ---------------------------------------------------
@@ -283,9 +278,9 @@ end
 ---------------------------------------------------
 -- G12, Nothing
 ---------------------------------------------------
-if (event=="G_PRESSED" and arg==12) then
-	MakeLarva()
-end
+	if (event=="G_PRESSED" and arg==12) then
+		MakeLarva()
+	end
 
 ------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
@@ -331,16 +326,10 @@ elseif (Race==3) then
 ---------------------------------------------------
 -- G5, Nothing
 ---------------------------------------------------
-if (event=="G_PRESSED" and arg==5) then
-	--Nothing
-end
-
----------------------------------------------------
--- G11, Nothing
----------------------------------------------------
-	if (event=="G_PRESSED"  and arg==11) then
+	if (event=="G_PRESSED" and arg==5) then
 		--Nothing
 	end
+
 ---------------------------------------------------
 -- G6, Nothing
 ---------------------------------------------------
@@ -351,9 +340,9 @@ end
 ---------------------------------------------------
 -- G12, Nothing
 ---------------------------------------------------
-if (event=="G_PRESSED" and arg==12) then
-	MakeLarva()
-end
+	if (event=="G_PRESSED" and arg==12) then
+		MakeLarva()
+	end
 
 end
 
@@ -385,6 +374,53 @@ function kitteWithRangedUnits()
 		Sleep(math.random(100, 110));
 		f = f+1;
 	end
+end
+
+---------------------------------------------------
+
+function splitUnits()
+	PressAndReleaseKey(ARMY1);
+	MoveMouseTo(25476, 55756);
+	PressAndReleaseMouseButton(1);
+	
+	PressAndReleaseKey(ARMY1);
+	MoveMouseTo(25476, 55756);
+	PressAndReleaseMouseButton(1);
+	
+	PressAndReleaseKey(ARMY1);
+	MoveMouseTo(27969, 55756);
+	PressAndReleaseMouseButton(1);
+	
+	PressAndReleaseKey(ARMY1);
+	MoveMouseTo(29813, 55574);
+	PressAndReleaseMouseButton(1);
+	
+	PressAndReleaseKey(ARMY1);
+	MoveMouseTo(31384, 55392);
+	PressAndReleaseMouseButton(1);
+	
+-- Mouse is at 23871, 55392
+-- Mouse is at 25476, 55756
+-- Mouse is at 27969, 55756
+-- Mouse is at 29813, 55574
+-- Mouse is at 31384, 55392
+-- Mouse is at 33194, 55574
+-- Mouse is at 35380, 55635
+-- Mouse is at 37327, 55392
+
+-- Mouse is at 23393, 58793
+-- Mouse is at 25408, 58611
+-- Mouse is at 27491, 59340
+-- Mouse is at 29950, 59097
+-- Mouse is at 31316, 59097
+-- Mouse is at 33331, 59401
+-- Mouse is at 35482, 58975
+-- Mouse is at 37224, 59036
+
+-- Mouse is at 23803, 62680
+-- Mouse is at 25510, 62498
+-- Mouse is at 27491, 62559
+
 end
 
 ---------------------------------------------------
